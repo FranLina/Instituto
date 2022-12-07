@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="commons/header :: header" />
+
+<body>
+    <!-- Menu principal -->
+
+    <head th:replace="commons/menu :: menu" />
+    <style>
+        form {
+            width: 50em;
+            margin-left: 2em;
+            margin-top: .8em;
+        }
+
+        h3 {
+            margin-left: 2em;
+            margin-top: .8em;
+        }
+
+        #divCheck,
+        #botonEnviar,
+        #botonCancelar {
+            margin-top: 2.5em;
+        }
+    </style>
+    <div class="container">
+
+        <h3>Datos del Alumno</h3>
+        <form th:action="@{/alumnos/update}" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <img th:src="'data:image/jpeg;base64,' + ${alumno.imageView}" class="card-img-top" alt="..."
+                            width="200px" height="200px">
+                        Ingresa el archivo:
+                        <input name="file" type="file" id="file" />
+                    </div>
+
+                </div>
+                <div class="col">
+                    <div>
+                        <label hidden for="codigo" class="form-label">Codigo</label>
+                        <input type="hidden" class="form-control" id="codigo" name="codigo" th:value="${alumno.codigo}">
+                    </div>
+                    <div>
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" th:value="${alumno.nombre}">
+                    </div>
+                    <div>
+                        <label for="apellidos" class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" id="apellidos" name="apellidos"
+                            th:value="${alumno.apellidos}">
+                    </div>
+                    <div>
+                        <label for="dni" class="form-label">DNI</label>
+                        <input type="text" class="form-control" id="dni" name="dni" th:value="${alumno.dni}">
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="email" name="email" th:value="${alumno.email}">
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="email" class="form-label">Fecha Nacimiento</label>
+                        <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento"
+                            th:value="${alumno.fechaNacimiento}">
+                    </div>
+
+                    <div class="mb-6" id="divCheck">
+                        <input type="checkbox" id="nuevo" name="nuevo" th:checked="${alumno.nuevo}">
+                        <label for="direccion">¿Es nuevo?</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Actualizar" class="btn btn-primary" id="botonEnviar">
+                <a th:href="@{/alumnos/list}" class="btn btn-primary" id="botonCancelar">Cancelar</a>
+                <a th:href="@{/alumnos/borrarAlumno?codigo=}+${alumno.codigo}" class="btn btn-primary"
+                    id="borrarAlumno">Borrar</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

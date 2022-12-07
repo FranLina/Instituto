@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="commons/header :: header" />
+
+<body>
+    <style type="text/css">
+        h1 {
+            text-align: center;
+            margin-bottom: .5em;
+        }
+    </style>
+    <div th:replace="commons/menu :: menu" />
+    <div class="container">
+        <h1>Alumnos</h1>
+        <a th:href="@{/alumnos/new}" class="btn btn-dark" id="nuevoCliente"><img th:src="@{/img/nuevo.png}"
+                class="card-img-top" alt="..." width="8px" height="20px" /></a>
+        <label id="textoNuevoCliente">Nuevo Alumno</label>
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>DNI</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Email</th>
+                    <th>Fecha Nacimineto</th>
+                    <th>Nuevo</th>
+                    <th>Operaciones</th>
+                </tr>
+            </thead>
+            <div th:each="alumno : ${alumnos}" class="col-3">
+                <tr>
+                    <td>
+                        <p th:text="${alumno.codigo}"></p>
+                    </td>
+                    <td>
+                        <p th:text="${alumno.dni}"></p>
+                    </td>
+                    <td>
+                        <p th:text="${alumno.nombre}"></p>
+                    </td>
+                    <td>
+                        <p th:text="${alumno.apellidos}"></p>
+                    </td>
+                    <td>
+                        <p th:text="${alumno.email}"></p>
+                    </td>
+                    <td>
+                        <p th:text="${alumno.fechaNacimiento}"></p>
+                    </td>
+                    <span th:if="${alumno.nuevo == false}">
+                        <td>
+                            <p th:text="NO"></p>
+                        </td>
+                    </span>
+                    <span th:if="${alumno.nuevo == true}">
+                        <td>
+                            <p th:text="SI"></p>
+                        </td>
+                    </span>
+                    <td>
+                        <a th:href="@{/alumnos/edit?codigo=}+${alumno.codigo}" class="btn btn-light"
+                            id="editarAlumno"><img th:src="@{/img/editar.png}" class="card-img-top" alt="..."
+                                width="8px" height="20px" /></a>
+                        <a th:href="@{/alumnos/borrarAlumno?codigo=}+${alumno.codigo}" class="btn btn-light"
+                            id="borrarCliente"><img th:src="@{/img/borrar.png}" class="card-img-top" alt="..."
+                                width="8px" height="20px" /></a>
+                    </td>
+                </tr>
+            </div>
+        </table>
+
+        <div th:replace="commons/pagination :: pagination" />
+    </div>
+    <div th:replace="commons/footer :: footer" />
+</body>
+
+</html>
